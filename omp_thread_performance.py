@@ -38,7 +38,7 @@ class core:
         axes.set_ylabel(label_y)
         axes.grid(linestyle=':')
 
-        pyplot.savefig(location, dpi=300)
+        pyplot.savefig(location, dpi=300, bbox_inches='tight')
 
 
     def make_graph(x, y, labels, title, label_x, label_y, location, legend='upper right', log=False,
