@@ -25,6 +25,22 @@ class core:
 
         return contents
 
+    
+    def make_graph_single(x, y, title, label_x, label_y, location):
+        fig, axes = pyplot.subplots(1, figsize=(10,4.5))
+
+        axes.plot(x, y)
+	# Add 45 deg line
+        axes.plot([1, 48], [1, 48], linestyle='dashed', color='grey')
+
+        axes.set_title(title)
+        axes.set_xlabel(label_x)
+        axes.set_ylabel(label_y)
+        axes.grid(linestyle=':')
+
+        pyplot.savefig(location, dpi=300)
+
+
     def make_graph(x, y, labels, title, label_x, label_y, location, legend='upper right', log=False,
                                 sub_title = ''):
         fig, axes = pyplot.subplots(1, figsize=(10,4.5))
@@ -112,8 +128,8 @@ class core:
         pyplot.show()
 
 Core = core()
-basedir = '/work/pwegmann/BESSI_TEST/bessi_test/benchmark/data/'
-filedir = '/work/pwegmann/BESSI_TEST/bessi_test/benchmark/figures/'
+basedir = '/work2/pwegmann/repos/bessi-benchmark/data/'
+filedir = '/work2/pwegmann/repos/bessi-benchmark/figures/'
 
 # Execution time vs. year for different number of threads averaged 
 # over the static schedule chunk size
@@ -161,8 +177,8 @@ for t in threads:
         x.append(list(range(0, len(content[0]))))
         labels.append('T=' + str(t) + ", C=" + str(s))
 
-core.make_graph(x, y, labels, "Execution time for different runtime configurations",
-                "Year", "Runtime [s]", filedir + "omp_thread_performance_thread_schedule_fastest.png")
+#core.make_graph(x, y, labels, "Execution time for different runtime configurations",
+#                "Year", "Runtime [s]", filedir + "omp_thread_performance_thread_schedule_fastest.png")
 
 
 # Speedup for different number of threads and chunk size
@@ -200,6 +216,18 @@ for i in range(0, len(z)):
 #        filedir + "omp_thread_performance_thread_schedule_heatmap.png")
 
 
+# Weak scaling using best schedule size (C=48)
+x = threads
+y = []
+for t in threads:
+    content = (core.get_content([basedir + "static_t" + str(t) + "_s48"]))[0]
+    y.append(np.average(content[79:]))
+
+y_max = y[0]
+for t in range(0, len(threads)):
+    y[t] = y_max/y[t]
+
+core.make_graph_single(x, y, "Speedup", "Threads", "Speedup", filedir + "omp_thread_performance_scaling.png")
 
 
 
