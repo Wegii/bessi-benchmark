@@ -27,7 +27,7 @@ class core:
 
     
     def make_graph_single(x, y, title, label_x, label_y, location):
-        fig, axes = pyplot.subplots(1, figsize=(10,4.5))
+        fig, axes = pyplot.subplots(1, figsize=(10,10))
 
         axes.plot(x, y)
 	# Add 45 deg line
