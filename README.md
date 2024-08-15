@@ -89,7 +89,7 @@ Fastest (see figure right) shows the execution time of $`T=24`$ and $`T=48`$ wit
 
 
 ### Scaling
-In order to determine the best runtime configuration, BESSI was executed with configurations taken from $`\{(T, C)}\ = \{1, 8, 12, 24, 32, 48\} \times \{1, 2, 4, 8, 12, 24, 48, 96\}`$. Furthermore, the strong scaling behaviour is examined.
+In order to determine the best runtime configuration, BESSI was executed with configurations taken from $`\{(T, C)\} = \{1, 8, 12, 24, 32, 48\} \times \{1, 2, 4, 8, 12, 24, 48, 96\}`$. Furthermore, the strong scaling behaviour is examined.
 
 Configuration scaling            |  Optimal scaling
 :-------------------------:|:-------------------------
